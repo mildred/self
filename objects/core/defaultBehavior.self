@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -354,19 +354,6 @@ way its printString may be truncated.\x7fModuleInfo: Module: defaultBehavior Ini
             | 
             r: printString.
             r size  <=  s ifTrue:  r  False: [namePrintString]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
-         'Category: error handling\x7fComment: same as error: except does not print to the Self shell.\x7fModuleInfo: Module: defaultBehavior InitialContents: FollowSlot\x7fVisibility: public'
-        
-         quietError: message = ( |
-             env = bootstrap stub -> 'lobby' -> ().
-            | 
-            env process this suspendWithError:
-                (env processErrors userError copy
-                    receiver: self)
-                    message:  (ensureString: message).
-            env process this errorContinueValue).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {

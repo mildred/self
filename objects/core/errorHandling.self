@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -41,15 +41,9 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
          error: message = ( |
              env = bootstrap stub -> 'lobby' -> ().
             | 
-            "If the error string is too long, the system crashes trying to draw the morphs.
-              -- dmu 11/05"
-            "Temporary fix for handling errors under Klein and Yoda. -- Adam, 5/06"
-            (_TheVMIfFail: [
-            env process this suspendAndTrace:
-                (env processErrors userError copy
+            handleError: ((env processErrors userError copy
                     receiver: self)
-                    message:  (ensureString: message) copyAtMostWithEllipsis: 2000.
-            env process this errorContinueValue] ) vmKitsError: message).
+                    message:  (ensureString: message) copyAtMostWithEllipsis: 2000)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
@@ -58,12 +52,10 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
          error: message Arguments: args = ( |
              env = bootstrap stub -> 'lobby' -> ().
             | 
-            env process this suspendAndTrace:
-                ((env processErrors userErrorWithArguments copy
+            handleError: ((env processErrors userErrorWithArguments copy
                     receiver: self)
                     message:  (ensureString: message))
-                    arguments: args.
-            env process this errorContinueValue).
+                    arguments: args).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
@@ -96,19 +88,23 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
+         'Category: error handling\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         handleError: e = ( |
+             env = bootstrap stub -> 'lobby' -> ().
+            | env process this handleError: e).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
          'Category: error handling\x7fComment: primitive failure\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot\x7fVisibility: public'
         
          primitiveFailedError: error Name: sel = ( |
              env = bootstrap stub -> 'lobby' -> ().
             | 
-            "Temporary fix for handling primitive failure under Klein and Yoda. -- dmu 3/6"
-            (_TheVMIfFail: [
-            env process this suspendAndTrace:
-                ((processErrors primitiveFailed copy
+            handleError: ((env processErrors primitiveFailed copy
                     receiver: self)
                     selector: sel)
-                    error:    error.
-            env process this errorContinueValue] ) vmKitsPrimitiveFailedError: error Name: sel).
+                    error:    error).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
@@ -119,6 +115,90 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
             globals preferences noisy ifTrue: [ '\a' print. "beep"].
             'Warning: ' print. string print. '.' printLine. 
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+         'Category: system\x7fCategory: error reporting\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         errorHandlers = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'errorHandlers' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals errorHandlers.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         default = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'default' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals errorHandlers default.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'default' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         value: e = ( |
+             env = bootstrap stub -> 'lobby' -> ().
+            | 
+            "If the error string is too long, the system crashes trying to draw the morphs.
+              -- dmu 11/05"
+            "Temporary fix for handling errors under Klein and Yoda. -- Adam, 5/06"
+            (_TheVMIfFail: [
+            env process this suspendAndTrace: e.
+            env process this errorContinueValue] ) vmKitsError: message).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         returnNil = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'returnNil' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals errorHandlers returnNil.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'returnNil' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         value = ( |
+             n = bootstrap stub -> 'globals' -> 'nil' -> ().
+            | n).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         silentAbort = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'silentAbort' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals errorHandlers silentAbort.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'silentAbort' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         value: e = ( |
+             env = bootstrap stub -> 'lobby' -> ().
+            | 
+            env process this abort).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         silentSuspend = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'silentSuspend' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals errorHandlers silentSuspend.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'errorHandlers' -> 'silentSuspend' -> () From: ( | {
+         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         value: e = ( |
+             env = bootstrap stub -> 'lobby' -> ().
+            | env process this suspend).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -173,6 +253,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'process' -> () From: ( | {
+         'Category: error handling\x7fModuleInfo: Module: errorHandling InitialContents: InitializeToExpression: (traits process errorHandlers default)'
+        
+         errorHandler <- bootstrap stub -> 'globals' -> 'errorHandlers' -> 'default' -> ().
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
          'Category: system\x7fCategory: error reporting\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot'
         
@@ -200,6 +286,25 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          value: e = ( |
             | error: e).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'block' -> () From: ( | {
+         'Category: error handling\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         onError: errorHandler = ( |
+             h.
+             r.
+            | 
+            h: process this errorHandler.
+            process this errorHandler: errorHandler.
+            r: onNonLocalReturn: [|:v|
+                process this errorHandler: h.
+                v ]
+               IfFail: [|:e|
+                process this errorHandler: h.
+                raiseError ].
+            process this errorHandler: h.
+            r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
@@ -249,6 +354,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                     rec _Perform: selector
                         With: sel With: msgType With: del With: mh With: args
             ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
+         'Category: error handling\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot'
+        
+         handleError: e = ( |
+            | errorHandler value: e).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
