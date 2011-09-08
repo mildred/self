@@ -64,7 +64,7 @@ COMPILE.gnu.precomp  = ${GCC}   ${GNUFLAGS} ${CPPFLAGS} ${CFLAGS}
 #  ${GNUFLAGS} ${CPPFLAGS} -funit-at-a-time -maccumulate-outgoing-args -fpch-preprocess
 
 
-#DYNLINKLIBS += -ldl
+DYNLINKLIBS += -ldl
 #NETLIBS = -lnsl
 #COMMON_PATCHED_OBJS += write.o 
 XLIBLIBS = -lX11

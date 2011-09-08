@@ -1,6 +1,6 @@
 redo ../bin/linux/all
 redo ../vm/linux/generated/lists
-redo ../vm/linux/optimized/Self
+redo ../vm/linux/optimized/all
 
 cp ../vm/linux/optimized/Self ..
 
