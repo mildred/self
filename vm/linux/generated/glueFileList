@@ -1,0 +1,9 @@
+ ../../../vm/src/any/prims/glueDefs.cpp 
+ ../../../vm/linux/generated/incls/_glueDefs.cpp.incl 
+ ../../../vm/src/any/prims/glueSupport.hh 
+ ../../../vm/src/any/runtime/interruptedCtx.hh 
+ ../../../vm/linux/generated/incls/_interruptedCtx_pd.hh.incl 
+ ../../../vm/src/i386/runtime/interruptedCtx_i386.hh 
+ ../../../vm/src/any/objects/foreignOop.hh 
+ ../../../vm/src/any/objects/proxyOop.hh 
+ ../../../vm/src/any/prims/glueDefs.hh

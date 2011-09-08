@@ -23,7 +23,7 @@ include       ${ROOT}/vm/templates/linux.make
 
 lists:
 	@echo Creating include and dependency files
-	@makeFileLists ${SRC_DIRS}
+	makeFileLists ${SRC_DIRS}
 	@rm -f includeDB Platform_linux
 	@makeDeps Platform_linux includeDB ${PLATFORM} ${INCLUDEDB}
 	@${CPP} -undef Dependencies.cpp Dependencies.tmp

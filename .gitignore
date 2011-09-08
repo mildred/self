@@ -44,3 +44,7 @@ vm/linux/generated/includeDB
 vm/linux/optimized/Self
 vm/linux/optimized/_precompiled.hh.gch
 vm/linux/optimized/vmDate.s
+.redo/
+/config
+*.tmp
+*.lock
