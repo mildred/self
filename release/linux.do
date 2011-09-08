@@ -1,4 +1,3 @@
-redo ../bin/linux/all
 redo ../vm/linux/generated/lists
 redo ../vm/linux/optimized/all
 
