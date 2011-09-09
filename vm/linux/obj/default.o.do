@@ -16,6 +16,10 @@ case "$source" in
   *.cpp)
     CXXFLAGS="$CXXFLAGS -include _precompiled.hh" cxx_compile "$3" "$source"
     ;;
+  *.s)
+    # Precompile then assemble
+    $CC $CPPFLAGS $CXXFLAGS -E "$source" | as -o "$3" --
+    ;;
   *)
     echo "Could not compile $source into $1$2" >&2
     exit 1
