@@ -11,10 +11,13 @@ done
 cat <<"EOF"
 
 default_compile() {
+  local rev=$1
+  shift
+  redo-ifchange $rev/_precompiled.hh.gch
   if [ -e $1.c ]; then
-    c_compile "$3" "$1.c"
+    c_compile "$3" $rev/_precompiled.hh.gch "$1.c"
   elif [ -e $1.cpp ]; then
-    cxx_compile "$3" "$1.cpp"
+    cxx_compile "$3" $rev/_precompiled.hh.gch "$1.cpp"
   else
     echo "Could not compile $1$2" >&2
     exit 1

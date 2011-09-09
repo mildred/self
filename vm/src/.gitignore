@@ -4,7 +4,9 @@ default.o.do
 /src_dir_list
 /src_file_list
 /obj_file_list
+/src_file_list_precompiled
 /Dependencies
 /config
 /incls/
 /Self
+/_precompiled.hh.gch
