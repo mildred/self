@@ -22,6 +22,13 @@ rc_record TARGET_COMPILER
 rc_record TARGET_ARCH
 rc_record PLATFORM
 
+define_flags='-DGENERATE_DEBUGGING_AIDS=0 -DSPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0 -DTARGET_IS_PROFILED=0 -DTARGET_IS_OPTIMIZED=1   -DXLIB -DFAST_COMPILER -DSIC_COMPILER -DDYNLINK_SUPPORTED -DDEBUG -DCOMPILER=GCC_COMPILER -DASSEMBLER= -DMANUFACTURER=  -DTARGET_OS_VERSION=LINUX_VERSION -DTARGET_OS_FAMILY=UNIX_FAMILY -DHOST_ARCH=I386_ARCH -DTARGET_ARCH=I386_ARCH'
+error_flags='-Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings'
+feature_flags='-fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector -fkeep-inline-functions'
+
+rc_append CXXFLAGS "$feature_flags $error_flags $define_flags"
+rc_append CFLAGS "$feature_flags $error_flags -Wtraditional-conversion -Wimplicit $define_flags"
+
 redo-ifchange bin/clean/makeFileLists
 redo-ifchange bin/clean/cwdRootedIn
 redo-ifchange bin/clean/makeDeps

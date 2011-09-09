@@ -8,16 +8,18 @@ redo redo-files
   rc_append CXXFLAGS "-I$(pwd)/$dir"
 done
 
+rc_append CFLAGS "-I$SELF_WORKING_DIR/objects/glue"
+rc_append CXXFLAGS "-I$SELF_WORKING_DIR/objects/glue"
+
 cat <<"EOF"
 
 default_compile() {
   local rev=$1
   shift
-  redo-ifchange $rev/_precompiled.hh.gch
   if [ -e $1.c ]; then
-    c_compile "$3" $rev/_precompiled.hh.gch "$1.c"
+    CFLAGS="$CFLAGS -include _precompiled.hh" c_compile "$3" "$1.c"
   elif [ -e $1.cpp ]; then
-    cxx_compile "$3" $rev/_precompiled.hh.gch "$1.cpp"
+    CXXFLAGS="$CXXFLAGS -include _precompiled.hh" cxx_compile "$3" "$1.cpp"
   else
     echo "Could not compile $1$2" >&2
     exit 1
