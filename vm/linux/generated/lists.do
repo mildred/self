@@ -1,5 +1,6 @@
 eval $(../../../redoconf/sh-init)
 rc_source ../../../config
+
 make lists >&2
 
 mv Dependencies Dependencies.tmp

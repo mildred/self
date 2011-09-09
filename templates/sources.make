@@ -129,6 +129,12 @@ publishList:
 
 rcsFileList:
 	@echo $(shell $(RCS_FILE_CMD))
+ 
+publishList_:
+	@echo $(PUB_FILE_CMD)
+
+rcsFileList_:
+	@echo $(RCS_FILE_CMD)
 
 absRCSFileList:
 	@sh -c 'for f in `gmake rcsFileList`; do echo	`cwdRootedIn ${ROOT}`/$$f; done'

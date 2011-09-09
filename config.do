@@ -12,12 +12,19 @@ rc_source_cat redoconf/modules/library_ncurses_static.rc
 
 export SELF_WORKING_DIR="$(pwd)"
 export PATH="$(pwd)/bin/clean:$PATH"
+export TARGET_COMPILER=gcc
+export TARGET_ARCH=i386
+export PLATFORM=linux
 
 rc_record SELF_WORKING_DIR
 rc_append_with_delim PATH : $(pwd)/bin/clean
+rc_record TARGET_COMPILER
+rc_record TARGET_ARCH
+rc_record PLATFORM
 
-redo bin/clean/makeFileLists
-redo bin/clean/cwdRootedIn
-redo bin/clean/makeDeps
-redo bin/clean/lock_run
+redo-ifchange bin/clean/makeFileLists
+redo-ifchange bin/clean/cwdRootedIn
+redo-ifchange bin/clean/makeDeps
+redo-ifchange bin/clean/lock_run
+redo-ifchange bin/clean/expandNames
 

@@ -38,6 +38,7 @@ foreach dir ($*)
   set objs = Objs.$dir:t
   rm -f $objs
   touch $objs
+  echo $objs
   foreach file ($files)
     set ext  = $file:e
     set base = $file:r
@@ -51,6 +52,7 @@ foreach dir ($*)
       endif
     endif
   end
+  cat $objs
   cat $objs >> $allobjs
 end
 
