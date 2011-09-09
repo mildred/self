@@ -10,4 +10,5 @@ rc_append CFLAGS "-I$SELF_WORKING_DIR/objects/glue"
 rc_append CXXFLAGS "-I$SELF_WORKING_DIR/objects/glue"
 rc_append CFLAGS "-I$(pwd)/generated/incls"
 rc_append CXXFLAGS "-I$(pwd)/generated/incls"
+rc_append LDFLAGS "-ldl -lX11 -lXext"
 

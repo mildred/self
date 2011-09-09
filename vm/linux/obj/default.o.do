@@ -1,13 +1,15 @@
 eval $(../../../redoconf/sh-init)
 rc_source ../config
 
-source="../../src/$(rc_cat list | grep "^$1$2\s" | cut -f2)"
+source="$(rc_cat list | grep "^$1$2\s" | cut -f2)"
 
 redo-ifchange ../generated/incls/_precompiled.hh ../generated/incls/_precompiled.hh.gch
 
 if [ glueCheckSum.o = "$1$2" ]; then
   CXXFLAGS="$CXXFLAGS -DGLUE_CHECKSUM=$(rc_shquote "$(rc_cat ../generated/glueCheckSum)")"
 fi
+
+redo-ifchange "$source"
 
 case "$source" in
   *.c)
@@ -18,7 +20,11 @@ case "$source" in
     ;;
   *.s)
     # Precompile then assemble
-    $CC $CPPFLAGS $CXXFLAGS -E "$source" | as -o "$3" --
+    depsfile="$1.deps"
+    rm -rf "$depsfile"
+    $CC $CPPFLAGS $CXXFLAGS -M -MF "$depsfile" -E "$source" | as -o "$3" --
+    redo-ifchange ${DEPS#*:}
+    rm -f "$depsfile"
     ;;
   *)
     echo "Could not compile $source into $1$2" >&2

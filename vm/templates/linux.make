@@ -40,7 +40,7 @@ PRECOMP_SRC_PATH = ${ROOT}/vm/${VM_SUBDIR}/generated/incls
 PRECOMP_DST_PATH = .
 
 %.hh.gch: %.hh
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 		rm -f ${PRECOMP_DST_PATH}/_precompiled.hh.gch; \
 		echo Precompiling header $< to $@; \
 		${COMPILE.gnu.precomp}  -o ${PRECOMP_DST_PATH}/_precompiled.hh.gch ${PRECOMP_SRC_PATH}/_precompiled.hh; \

@@ -39,14 +39,14 @@ GLUECHECKSUM = ${ROOT}/vm/${VM_SUBDIR}/generated/glueCheckSum
 
 ifeq (${COMPILER}, GCC_COMPILER)
   ${GLUEFILELIST} : glueDefs.cpp
-	  @lock_run _`basename $@.lock` " \
+	  lock_run _`basename $@.lock` " \
 	      echo Building ${GLUEFILELIST} ; \
 	      ${COMPILE.gnu.s} ${INCLUDES} ${OSDEFS} -MM ${GLUEDEFS_C} | \
 	      sed -e 's/\\\\//' -e 's/glueDefs.o://' >${GLUEFILELIST} ; \
 	     " 
 else
   glueDefs.o ${GLUEFILELIST} : glueDefs.cpp
-	  @lock_run _`basename $@.lock` " \
+	  lock_run _`basename $@.lock` " \
 	      echo Compiling ${GLUEDEFS_C} and building ${GLUEFILELIST} ; \
 	      ( ${COMPILE.gnu.o.nog} -H ${GLUEDEFS_C} 2>&1 ) | \
 		  grep '^[ 	]*\.' >${GLUEFILELIST} ; \
@@ -54,13 +54,13 @@ else
 endif
 
 ${GLUECHECKSUM} : ${GLUEFILELIST}
-	@lock_run _`basename $@.lock` " \
+	lock_run _`basename $@.lock` " \
 	    echo Calculating glue check sum ; \
             cat /dev/null/ \`cat ${GLUEFILELIST}\` | skipComments | sum | awk '{print "1" \$$1}' >${GLUECHECKSUM} \
 	   "
 
 glueCheckSum.o : ${GLUECHECKSUM_C} ${GLUECHECKSUM}
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 	   echo Compiling ${GLUECHECKSUM_C} ; \
 	   ${COMPILE.gnu.o} -DGLUE_CHECKSUM=`cat ${GLUECHECKSUM}` ${INCLUDE_PRECOMP} ${GLUECHECKSUM_C}; \
 	  "
@@ -68,20 +68,20 @@ glueCheckSum.o : ${GLUECHECKSUM_C} ${GLUECHECKSUM}
 # don't use -g with -O for glue stuff - debug info not useful, and compiles
 # take too long
 %glue.o: %glue.cpp ${GLUECHECKSUM}
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 	    echo Compiling $< ; \
 	    rm -f $@ ; \
 	    ${COMPILE.gnu.o.nog} -DGLUE_CHECKSUM=`cat ${GLUECHECKSUM}` ${INCLUDE_PRECOMP} $< ; \
 	   "
 
 glue.o: glue.cpp
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 	    echo Compiling $< ; \
 	    rm -f $@ ; \
 	    ${COMPILE.gnu.o.nog} ${INCLUDE_PRECOMP} $< ; \
 	   " 
 %.o: %.cpp 
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 	    echo Compiling $< ; \
 	    rm -f $@ ; \
 	    ${COMPILE.gnu.o} ${INCLUDE_PRECOMP} $< ; \
@@ -89,13 +89,13 @@ glue.o: glue.cpp
 
 # intermediate files
 %.i: %.cpp
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 		echo Preprocessing $< to $@; \
 		${COMPILE.gnu.i} ${INCLUDE_PRECOMP} $< >$@; \
 	"
 
 %.s: %.cpp
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 		echo Preprocessing $< to $@; \
 		${COMPILE.gnu.s} ${INCLUDE_PRECOMP} $< ; \
 		rm -f /tmp/$*.$$$$..cpp; \
@@ -104,7 +104,7 @@ glue.o: glue.cpp
 
 # Assembling
 %.o: %.s
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 	    echo Assembling $*.s ; \
 	    rm -f $@ ; \
 	    ${COMPILE1.s} $< ${ASM_FILTER} >/tmp/$*.$$$$.s; \
@@ -113,7 +113,7 @@ glue.o: glue.cpp
 	  "
 # intermediate files
 %.i: %.s
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 		echo Preprocessing $*.s to $@; \
 		${COMPILE1.s} $< >$@; \
           "
@@ -121,7 +121,7 @@ glue.o: glue.cpp
 
 # Creating shared libraries
 %.so: %.o
-	@lock_run _$@.lock " \
+	lock_run _$@.lock " \
 		echo Linking $@; \
 		ld ${GLUE_LD_FLAGS} -o $@ $< ${EXTRA_LIBS} ${$*_libs}; \
 	"
