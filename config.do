@@ -34,4 +34,6 @@ redo-ifchange bin/clean/cwdRootedIn
 redo-ifchange bin/clean/makeDeps
 redo-ifchange bin/clean/lock_run
 redo-ifchange bin/clean/expandNames
+redo-ifchange bin/clean/skipComments
+
 

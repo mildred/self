@@ -3,7 +3,11 @@ rc_source ../config
 
 source="../../src/$(rc_cat list | grep "^$1$2\s" | cut -f2)"
 
-redo-ifchange ../incls/_precompiled.hh ../incls/_precompiled.hh.gch
+redo-ifchange ../generated/incls/_precompiled.hh ../generated/incls/_precompiled.hh.gch
+
+if [ glueCheckSum.o = "$1$2" ]; then
+  CXXFLAGS="$CXXFLAGS -DGLUE_CHECKSUM=$(rc_shquote "$(rc_cat ../generated/glueCheckSum)")"
+fi
 
 case "$source" in
   *.c)
