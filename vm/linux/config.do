@@ -2,13 +2,10 @@ eval $(../../redoconf/sh-init)
 rc_source_cat ../../config
 
 rc_cat src_dir_list | while read dir; do
-  rc_append CFLAGS "-I$(dirname "`pwd`")/src/$dir"
-  rc_append CXXFLAGS "-I$(dirname "`pwd`")/src/$dir"
+  rc_append CPPFLAGS "-I$(dirname "`pwd`")/src/$dir"
 done
 
-rc_append CFLAGS "-I$SELF_WORKING_DIR/objects/glue"
-rc_append CXXFLAGS "-I$SELF_WORKING_DIR/objects/glue"
-rc_append CFLAGS "-I$(pwd)/generated/incls"
-rc_append CXXFLAGS "-I$(pwd)/generated/incls"
-rc_append LDFLAGS "-ldl -lX11 -lXext"
+rc_append CPPFLAGS "-I$SELF_WORKING_DIR/objects/glue"
+rc_append CPPFLAGS "-I$(pwd)/generated/incls"
+rc_append LDFLAGS "-ldl -lX11 -lXext -lpthread"
 

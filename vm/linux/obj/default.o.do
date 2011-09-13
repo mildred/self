@@ -20,11 +20,8 @@ case "$source" in
     ;;
   *.s)
     # Precompile then assemble
-    depsfile="$1.deps"
-    rm -rf "$depsfile"
-    $CC $CPPFLAGS $CXXFLAGS -M -MF "$depsfile" -E "$source" | as -o "$3" --
-    redo-ifchange ${DEPS#*:}
-    rm -f "$depsfile"
+    # TODO: dependency check
+    cpp $CPPFLAGS -E "$source" >"$1.s" && as -o "$3" "$1.s"
     ;;
   *)
     echo "Could not compile $source into $1$2" >&2
