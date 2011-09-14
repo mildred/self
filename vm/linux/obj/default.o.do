@@ -21,7 +21,7 @@ case "$source" in
   *.s)
     # Precompile then assemble
     # TODO: dependency check
-    cpp $CPPFLAGS -E "$source" >"$1.s" && as -o "$3" "$1.s"
+    $CC $CPPFLAGS $ASMFLAGS -c "$source" -o "$3"
     ;;
   *)
     echo "Could not compile $source into $1$2" >&2
