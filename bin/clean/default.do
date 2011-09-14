@@ -1,8 +1,8 @@
 command="$(basename "$1$2")"
-cmddir=shell
-redo ../linux/all
+
 if [ -f "../shell/$command" ]; then
   redo-ifchange "../shell/$command"
+  cmddir=shell
 else
   redo-ifchange "../linux/$command"
   cmddir=linux
