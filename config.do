@@ -26,8 +26,9 @@ define_flags='-DGENERATE_DEBUGGING_AIDS=0 -DSPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=
 error_flags='-Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings'
 feature_flags='-fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector -fkeep-inline-functions'
 
-rc_append CXXFLAGS "$feature_flags $error_flags $define_flags"
-rc_append CFLAGS "$feature_flags $error_flags -Wtraditional-conversion -Wimplicit $define_flags"
+rc_append CPPFLAGS "$define_flags"
+rc_append CXXFLAGS "$feature_flags $error_flags"
+rc_append CFLAGS "$feature_flags $error_flags -Wtraditional-conversion -Wimplicit"
 
 redo-ifchange bin/clean/makeFileLists
 redo-ifchange bin/clean/cwdRootedIn

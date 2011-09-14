@@ -1,5 +1,5 @@
 eval $(../../redoconf/sh-init)
-rc_source_cat ../../config
+rc_source ../../config
 
 redo-ifchange obj/Self
 

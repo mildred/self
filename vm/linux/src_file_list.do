@@ -8,11 +8,11 @@ rc_source ../../config
     popd > /dev/null
   done
 
+  echo "generated/vmDate.s"
   echo "../../objects/glue/xlib_glue.cpp"
   echo "../../objects/glue/stat_glue.cpp"
   echo "../../objects/glue/termcap_glue.cpp"
   echo "../../objects/glue/transcendental_glue.cpp"
-  echo "generated/vmDate.s"
 
 ) >"$3"
 

@@ -6,12 +6,12 @@ This is the Self Virtual Machine
 How to compile for Linux
 ========================
 
-    redo release/linux
+    redo Self
 
 if you don't have [redo](https://github.com/apenwarr/redo/) installed,
 you can use the minimal redo version included in `redoconf`:
 
-    redoconf/minimal-redo release/linux
+    redoconf/minimal-redo Self
 
 You would need:
 
