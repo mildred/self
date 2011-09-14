@@ -1,5 +1,6 @@
 eval $(../../redoconf/sh-init)
 rc_source_cat ../../config
+redo ../../binaries
 
 rc_cat src_dir_list | while read dir; do
   rc_append CPPFLAGS "-I$(dirname "`pwd`")/src/$dir"

@@ -30,12 +30,4 @@ rc_append CPPFLAGS "$define_flags"
 rc_append CXXFLAGS "$feature_flags $error_flags"
 rc_append CFLAGS "$feature_flags $error_flags -Wtraditional-conversion -Wimplicit"
 
-#redo-ifchange bin/clean/makeFileLists
-#redo-ifchange bin/clean/cwdRootedIn
-redo-ifchange bin/clean/makeDeps
-#redo-ifchange bin/clean/lock_run
-redo-ifchange bin/clean/expandNames
-#redo-ifchange bin/clean/skipComments
-redo-ifchange bin/clean/make_vmDate
-
 
