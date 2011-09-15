@@ -72,10 +72,10 @@ class CountStub : public NCodeBase {
   void write_snapshot(FILE *f);
   pc_t jump_addr();
  protected:
-  inline void set_callee(CountCodePattern* pattern, int32 addr); 
-  inline void set_callee(int32 addr) { set_callee(pattern[countType()], addr); }
-  inline void set_count_addr(CountCodePattern* pattern, int32 addr);
-  inline int32 count_addr(CountCodePattern* pattern);
+  inline void set_callee(CountCodePattern* pattern, pint addr); 
+  inline void set_callee(pint addr) { set_callee(pattern[countType()], addr); }
+  inline void set_count_addr(CountCodePattern* pattern, pint addr);
+  inline pint count_addr(CountCodePattern* pattern);
   friend void countStub1_init();
   friend void countStub2_init();
 };

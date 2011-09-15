@@ -36,12 +36,12 @@ class slotsMapDeps: public slotsMap {
 
  protected:
   // chain functions
-  friend int32 map_chain_offset() {
-    return (int32) (((slotsMapDeps*) NULL)->map_chain());
+  friend pint map_chain_offset() {
+    return (pint) (((slotsMapDeps*) NULL)->map_chain());
   }
 
   friend slotsMapDeps* map_from_map_chain(nmln* p) {
-    return (slotsMapDeps*) (int32(p) - map_chain_offset());
+    return (slotsMapDeps*) (pint(p) - map_chain_offset());
   }
   
  public:

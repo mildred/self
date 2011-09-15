@@ -12,20 +12,23 @@
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
+  #ifdef __x86_64__
+  #warning I replaced a lot of int32 with pint and ptr_t here
+  #endif
 
-  inline void CountStub::set_count_addr(CountCodePattern* patt, int32 addr) {
-    int32* p = (int32*)(int32(insts()) + patt->countAddr_offset);
-    *p = addr;
+  inline void CountStub::set_count_addr(CountCodePattern* patt, pint addr) {
+    ptr_t* p = (ptr_t*)(pint(insts()) + patt->countAddr_offset);
+    *p = ptr_t(addr);
   }
   
-  inline int32 CountStub::count_addr(CountCodePattern* patt) {
-    int32* p = (int32*)(int32(insts()) + patt->countAddr_offset);
-    return *p;
+  inline pint CountStub::count_addr(CountCodePattern* patt) {
+    ptr_t* p = (ptr_t*)(pint(insts()) + patt->countAddr_offset);
+    return pint(*p);
   }
   
-  inline void CountStub::set_callee(CountCodePattern* patt, int32 addr) {
-    int32* p = (int32*)(int32(insts()) + patt->nmAddr_offset);
-    *p = addr - int32(p) - sizeof(int32);
+  inline void CountStub::set_callee(CountCodePattern* patt, pint addr) {
+    ptr_t* p = (ptr_t*)(pint(insts()) + patt->nmAddr_offset);
+    *p = ptr_t(addr - pint(p) - sizeof(ptr_t));
   }
 
   

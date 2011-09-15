@@ -40,10 +40,12 @@ typedef unsigned int    uint32;         // unsigned integer with >= 32 bits
   typedef int32         fint;           // portablest precision-irrelevant int
 # endif
 
-typedef int32 smi;
+typedef pint smi;
 typedef unsigned char u_char;
 typedef   signed char s_char;
 typedef u_char bool8;
+
+typedef void* ptr_t;
 
 # if COMPILER == MWERKS_COMPILER 
   typedef long int sigset_t; // for interruptedContext

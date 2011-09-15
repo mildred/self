@@ -60,7 +60,7 @@ class Assembler: public BaseAssembler {
   void addOffset(OperandType, bool is_embedded, bool is_relative);
   
   void Backpatch(pc_t destp, pc_t target) {
-    *((int32*)destp) += (int32)target;
+    *((pint*)destp) += (pint)target;
   }
   
   void printRM(RegSize rs, Location r, int32 d, OperandType t, Location index, Scale s, char* ps, bool is_call = false);

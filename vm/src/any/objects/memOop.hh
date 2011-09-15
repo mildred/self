@@ -33,7 +33,7 @@ class memOopClass: public oopClass {
   // friend void enumeration_list::add_families_1(oop* bottom, oop* top);
   
   // constructor
-  friend memOop as_memOop(void* p) { return memOop(int32(p) + Mem_Tag); }
+  friend memOop as_memOop(void* p) { return memOop(pint(p) + Mem_Tag); }
   
   // "destructor"
   memOopClass* addr() { return (memOopClass*) (pint(this) - Mem_Tag); }
@@ -57,20 +57,20 @@ class memOopClass: public oopClass {
  public:
   friend memOop mark_memOop(memOop p) {
     p->assert_unmarked_memOop();
-    int32 bits = (int32) p;
+    pint bits = (pint) p;
     setNth(bits, mark_memOop_bit);
     memOop(bits)->assert_marked_memOop();
     return memOop(bits); 
   }
   friend memOop unmark_memOop(memOop p) {
     p->assert_marked_memOop();
-    int32 bits = (int32) p;
+    pint bits = (pint) p;
     clearNth(bits, mark_memOop_bit);
     memOop(bits)->assert_unmarked_memOop();
     return memOop(bits); 
   }
   friend bool is_marked_memOop(memOop p) {
-    int32 bits = (int32) p;
+    pint bits = (pint) p;
     return isSet(bits, mark_memOop_bit); 
   }
 
@@ -149,7 +149,7 @@ class memOopClass: public oopClass {
     return is_object_start(mark()) ? 0 : compute_derived_offset(); }
 
   // compiler support
-  friend int32 map_offset() {
+  friend pint map_offset() {
     // byte offset from a tagged memOop (i.e. returns 3)
-    return int32(&memOop(NULL)->addr()->_map); }
+    return pint(&memOop(NULL)->addr()->_map); }
 };

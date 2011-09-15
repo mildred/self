@@ -14,8 +14,8 @@
 
 template<class data_type> class BoundedListTemplate : public ResourceObj {
  protected:
-  int32 len;            /* current length */
-  int32 max;            /* maximum length */
+  pint len;            /* current length */
+  pint max;            /* maximum length */
   data_type* data;       /* data array     */
   bool on_C_heap;       /* allocated on C heap?     */
 

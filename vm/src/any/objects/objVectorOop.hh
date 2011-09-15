@@ -78,7 +78,7 @@ class objVectorOopClass: public slotsOopClass {
   void  *convertProxyArray(void*);
 
   // compiler support
-  friend int32 objVector_len_offset() {
-    return int32(&objVectorOop(NULL)->addr()->_len); }
+  friend pint objVector_len_offset() {
+    return pint(&objVectorOop(NULL)->addr()->_len); }
   
 };

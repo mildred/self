@@ -63,8 +63,8 @@ class sendDesc {
   char* jump_addr();
   void set_jump_addr(char* t);
   
-  void shift_jump_addr(int32 delta) {
-    set_jump_addr((char*) ((int32) jump_addr() + delta)); }
+  void shift_jump_addr(pint delta) {
+    set_jump_addr((char*) ((pint) jump_addr() + delta)); }
   
   LookupType raw_lookupType() { 
     return *(LookupType*) (((char*)this) + lookupType_offset); }

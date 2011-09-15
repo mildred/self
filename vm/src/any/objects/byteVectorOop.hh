@@ -126,10 +126,10 @@ class byteVectorOopClass: public slotsOopClass {
   byteVectorOop verify_opts_prim();
 
   // compiler support
-  friend int32 byteVector_len_offset() {
-    return int32(&byteVectorOop(0)->addr()->_len); }
-  friend int32 byteVector_bytes_offset() {
-    return int32(&byteVectorOop(0)->addr()->_bytes); }
+  friend pint byteVector_len_offset() {
+    return pint(&byteVectorOop(0)->addr()->_len); }
+  friend pint byteVector_bytes_offset() {
+    return pint(&byteVectorOop(0)->addr()->_bytes); }
 
 };
 
