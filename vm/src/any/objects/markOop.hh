@@ -50,30 +50,30 @@ class markOopClass: public oopClass {
   Map* map() { return Memory->mark_map; }
   
   // accessors  
-    bool     is_objectMarked()        { return          int32(this) &  object_is_marked_mask_in_place ; }
-    markOop  with_objectIsMarked()    { return markOop( int32(this) |  object_is_marked_mask_in_place); }
-    markOop  without_objectIsMarked() { return markOop( int32(this) & ~object_is_marked_mask_in_place); }
+    bool     is_objectMarked()        { return          pint(this) &  object_is_marked_mask_in_place ; }
+    markOop  with_objectIsMarked()    { return markOop( pint(this) |  object_is_marked_mask_in_place); }
+    markOop  without_objectIsMarked() { return markOop( pint(this) & ~object_is_marked_mask_in_place); }
     
 # define VALUE_ACCESSOR(name, setAction, setAssert)                           \
                                                                               \
     int32 name() {                                                            \
-      return maskBits(int32(this), CONC(name,_mask_in_place))                 \
+      return maskBits(pint(this), CONC(name,_mask_in_place))                 \
              >> CONC(name,_shift); }                                          \
                                                                               \
     markOop CONC(set_,name)(int32 v) {                                        \
       setAction;                                                              \
-      markOop val = markOop((int32(this) & ~CONC(name,_mask_in_place)) |      \
+      markOop val = markOop((pint(this) & ~CONC(name,_mask_in_place)) |      \
              ((v & CONC(name,_mask)) << CONC(name,_shift)));                  \
       setAssert;                                                              \
       return val; }                                                           \
                                                                               \
     int32 CONC(name,_in_place)() {                                            \
-      return maskBits(int32(this), CONC(name,_mask_in_place)); }              \
+      return maskBits(pint(this), CONC(name,_mask_in_place)); }              \
                                                                               \
     markOop CONC3(set_,name,_in_place)(int32 v) {                             \
       assert((v & ~CONC(name,_mask_in_place)) == 0,                           \
              "shouldn't overflow field");                                     \
-      return markOop((int32(this) & ~CONC(name,_mask_in_place)) | v); }       \
+      return markOop((pint(this) & ~CONC(name,_mask_in_place)) | v); }       \
                                                                               \
     markOop CONC(incr_,name)() {                                              \
       int32 n = CONC(name,_in_place)();                                       \

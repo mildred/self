@@ -200,8 +200,8 @@ frame* frame::make_full_frame(char* pc)            {
 }
 frame* frame::make_full_frame_after_trap(char* pc) {  
   return (frame*)
-       (int32(this)
-    -   ((int32(this) - frame_alignment_offset*oopSize) & (frame_word_alignment*oopSize - 1)));
+       (pint(this)
+    -   ((pint(this) - frame_alignment_offset*oopSize) & (frame_word_alignment*oopSize - 1)));
 }
 frame* frame::make_full_frame_on_user_stack()      {  return this; }
 

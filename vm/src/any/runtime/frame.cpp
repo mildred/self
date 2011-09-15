@@ -878,7 +878,7 @@ RegisterString frame::mask_if_present() {
 }
 
 bool frame::is_aligned() { 
-  return ((int32(this)  +  frame_alignment_offset * BytesPerWord)    &    (frame_word_alignment * BytesPerWord  -  1)) 
+  return ((pint(this)  +  frame_alignment_offset * BytesPerWord)    &    (frame_word_alignment * BytesPerWord  -  1)) 
           == 0;
 }
 

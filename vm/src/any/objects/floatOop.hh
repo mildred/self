@@ -71,7 +71,7 @@ oop float_ge_prim(floatOop x, floatOop y);
   
   inline float floatOopClass::value() {
     floatHolder x;
-    x.i = uint32(this) - Float_Tag;
+    x.i = puint(this) - Float_Tag;
     return x.f;
   }
 # endif
