@@ -42,6 +42,7 @@ feature_flags='-fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-prote
 if [ -n "$HAVE_X86_64" ]; then
   #feature_flags="$feature_flags -fpermissive"
   define_flags="$define_flags -DX86_64"
+  error_flags="$error_flags -Werror=int-to-pointer-cast"
   #rc_record COMPILE_FOR_32_BITS=1
 fi
 
