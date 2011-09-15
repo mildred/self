@@ -3,6 +3,6 @@ rc_source ../../config
 
 redo-ifchange _precompiled.hh
 
-gcc $CPPFLAGS $CXXFLAGS -g -o "$3" _precompiled.hh
-
+CXXFLAGS="$CXXFLAGS -g" cxx_compile "$3" _precompiled.hh
+redo-stamp <"$3"
 
