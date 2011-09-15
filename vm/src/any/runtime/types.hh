@@ -27,8 +27,19 @@ typedef char             int8;          // signed integer with >= 7 bits
 typedef unsigned char   uint8;          // unsigned integer with >= 8 bits
 typedef short           int16;          // signed integer with >= 15 bits
 typedef unsigned short  uint16;         // unsigned integer with >= 16 bits
-typedef int              int32;         // signed integer with >= 31 bits
-typedef unsigned int    uint32;         // unsigned integer with >= 32 bits
+                                        // signed integer with >= 31 bits containing a pointer
+# if INTPTR_MAX >= INT32_MAX || INTPTR_MIN <= INT32_MIN
+  # define INT32_IS_PINT
+  typedef intptr_t       int32;
+# else
+  typedef int32_t        int32;
+# endif
+# if UINTPTR_MAX >= UINT32_MAX     // unsigned integer with >= 32 bits containing a pointer
+  # define UINT32_IS_PUINT
+  typedef uintptr_t     uint32;
+# else
+  typedef uint32_t      uint32;
+# endif
 
 
 # if  TARGET_ARCH == SPARC_ARCH  \
