@@ -48,3 +48,4 @@ vm/linux/optimized/vmDate.s
 /config
 *.tmp
 *.lock
+.do_built*

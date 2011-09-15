@@ -1,0 +1,20 @@
+#!/bin/sh
+
+cd "$(dirname "$0")"
+git clean -fdx redoconf
+rm -f config
+if which redo >/dev/null 2>/dev/null; then
+  redo=redo
+else
+  redo=redoconf/minimal-redo
+fi
+
+if $redo config; then
+  echo
+  echo "Configuration Successfull"
+  echo "You can change the detected configuration by manually editing the config file"
+else
+  echo
+  echo "Configuration Failed"
+  echo "Please install missing dependancies and rerun configure"
+fi
