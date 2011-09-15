@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.6 $ */
 
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.x
@@ -11,7 +11,6 @@
 
 // CAVEAT: the info here is redundantly contained in other files, including
 // i386.format.h !!!!
-
 
 # if  TARGET_ARCH == I386_ARCH
 

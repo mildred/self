@@ -81,6 +81,9 @@
   # endif
   # if defined(__ppc__)
     # define TARGET_ARCH PPC_ARCH
+  # elif defined(__x86_64__)
+    # define TARGET_ARCH I386_ARCH
+    # warning "Rename I386_ARCH to X86_ARCH"
   # elif defined(__i386__)
     # define TARGET_ARCH I386_ARCH
   # else

@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.5 $ */
 
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
