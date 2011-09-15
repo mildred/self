@@ -51,8 +51,7 @@
     assert(!(p->is_mark() || p == badOop), "bad oop");
     if (printing && print) {
       lprintf("  .data ");
-      #warning Conversion from pointer to integer, does printX understand full range of pint?
-      printX(pint(p), OopOperand);
+      printX(p, OopOperand);
       lprintf("\n");
     }
     if (p->is_mem()) doAddOffset(OopOperand, false, false);

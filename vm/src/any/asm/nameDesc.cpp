@@ -12,20 +12,20 @@
 void LocationNameDesc::print() {
   lprintf("@");
   printLocation(location());
-  lprintf(" (%d)", (void*)offset);
+  lprintf(" (%d)", (int)offset);
 }
 
 void ValueNameDesc::print() {
   lprintf("=");
   value()->print_real_oop();
-  lprintf(" (%d)", (void*)offset);
+  lprintf(" (%d)", (int)offset);
 }
 
 void BlockValueNameDesc::print() {
   lprintf("[=");
   value()->print_real_oop();
   lprintf("]");
-  lprintf(" (%d)", (void*)offset);
+  lprintf(" (%d)", (int)offset);
 }
 
 void MemoizedBlockNameDesc::print() {
@@ -34,12 +34,12 @@ void MemoizedBlockNameDesc::print() {
   lprintf("=");
   value()->print_real_oop();
   lprintf("]");
-  lprintf(" (%d)", (void*)offset);
+  lprintf(" (%d)", (int)offset);
 }
 
 void IllegalNameDesc::print() {
   lprintf("<illegal>");
-  lprintf(" (%d)", (void*)offset);
+  lprintf(" (%d)", (int)offset);
 }
 
 # ifdef SIC_COMPILER
@@ -56,7 +56,7 @@ void IllegalNameDesc::print() {
     printLocation(location());
     lprintf("=");
     value()->print_real_oop();
-    lprintf(" [%#lx] (%d)", block, (void*)offset);
+    lprintf(" [%#lx] (%d)", (long)block, (int)offset);
   }
 # endif
 

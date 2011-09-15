@@ -53,7 +53,7 @@ void BaseAssembler::printX(int32 d, OperandType t, bool imm) {
 }
 
 
-void BaseAssembler::print_disp(int32 d, OperandType t) {
+void BaseAssembler::print_disp(pint d, OperandType t) {
   switch (t) {
    case RegisterOperand:
     lprintf("");
@@ -239,11 +239,11 @@ void BaseAssembler::compare_results(char* buf) {
         if (j >= locsEnd)  fatal("could not find loc, perhaps forgot to tally() after test instruction");
       fatal5("assembler flunked at byte %d, instruction %d, started at %d\n"
       "x/i 0x%x\nx/i 0x%x", 
-      i, j - locsStart - 1, j[-1].offset(), buf + j[-1].offset(), instsStart + j[-1].offset());
+      pint(i), pint(j - locsStart - 1), pint(j[-1].offset()), pint(buf + j[-1].offset()), pint(instsStart + j[-1].offset()));
     }
   if (instsLen() != test_file_size)
     fatal2("Self assembler generated %d bytes, but Unix assembler generated %d bytes\n",
-           instsLen(), test_file_size);
+           pint(instsLen()), pint(test_file_size));
 }
 
 // override me

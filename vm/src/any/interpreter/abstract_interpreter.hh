@@ -348,7 +348,7 @@ class abstract_interpreter: public AnywhereObj {
   virtual void do_illegal_no_operand_code() { do_illegal_code(); }
   virtual void do_illegal_code()            {
     fatal3("bad op code: %ld (opcode: $ld, index: %ld)",
-     bc.code, bc.op, bc.x); 
+     pint(bc.code), pint(bc.op), pint(bc.x)); 
   }
   
   

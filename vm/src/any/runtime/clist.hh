@@ -8,8 +8,8 @@
 # endif
 
 
-inline int32 addressHash(void* v, int32 m) {
-  return lowerBits(int32(v) >> 5, m);
+inline pint addressHash(void* v, int32 m) {
+  return lowerBits(pint(v) >> 5, m);
 }
 
 enum { tcCList = 4000 };
@@ -439,7 +439,7 @@ ListTemplate(abstractSlotRef,abstractSlotRef*)
 class LookupMarker;
 IdentityListTemplate(LookupMarker,LookupMarker*)
 
-IdentityListTemplate(Int,int32)
+IdentityListTemplate(Int,pint)
 IdentityListTemplate(StringOop,stringOop)
 IdentityListTemplate(Oop, oop)
 

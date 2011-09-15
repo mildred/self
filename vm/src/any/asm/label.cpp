@@ -36,11 +36,11 @@ void Label::define(char* t, Label* other) {
   if (patch) theAssembler->Backpatch(patch, t);
   if (theAssembler->printing) {
     if (other) {
-      lprintf("L%ld = L%ld \n", (void*)id(), (void*)other->id());
+      lprintf("L%ld = L%ld \n", (long)id(), (long)other->id());
     } else if (t != theAssembler->addr()) {
-      lprintf("L%ld = %#lx\n", (void*)id(), t);
+      lprintf("L%ld = %#lx\n", (long)id(), t);
     } else {
-      lprintf("L%ld: \n", (void*)id());
+      lprintf("L%ld: \n", (long)id());
     }
   }
   if (next) next->define(t, other);

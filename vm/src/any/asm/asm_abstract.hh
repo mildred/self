@@ -64,8 +64,9 @@ public:
   void Zero();
 
   void Comment(pc_t s);
-  void printX(int32 x, OperandType t, bool imm = false);
-  void print_disp(int32 x, OperandType t);
+  #warning printX and print_disp had int32, now pint. Is that correct?
+  void printX(pint x, OperandType t, bool imm = false);
+  void print_disp(pint x, OperandType t);
   
   int32 offset()                { return instsEnd - instsStart; }
   void setOffset(int32 offset)  { instsEnd = instsStart + offset; }
