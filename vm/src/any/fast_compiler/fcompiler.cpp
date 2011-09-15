@@ -76,13 +76,13 @@ nmethod* FCompiler::compile() {
     if (PrintCompilationStatistics) {
       lprintf("\n*NIC-time=|%2.1f| ms; to/co/sc/lo/de/bc= |%d|%d|%d|%d|%d|%d|", 
               *(void**)&dt, 
-              (void*)(nm->instsLen() + nm->scopes->length() + 
+              (int)(nm->instsLen() + nm->scopes->length() + 
                 nm->locsLen() + nm->depsLen),
-              (void*)nm->instsLen(), 
-              (void*)nm->scopes->length(),
-              (void*)nm->locsLen(), 
-              (void*)nm->depsLen,
-              (void*) (nm->isAccess()
+              (int)nm->instsLen(), 
+              (int)nm->scopes->length(),
+              (int)nm->locsLen(), 
+              (int)nm->depsLen,
+              (int) (nm->isAccess()
                        ? 0 :
                        ((methodMap*)(nm->method()->map()))
                           ->codes()->length()));

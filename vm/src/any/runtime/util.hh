@@ -72,6 +72,10 @@ inline void set_words(int32* from, fint count, pint value = 0) {
   set_oops((oop*) from, count, (oop) value);
 }
 
+inline pint   min(pint   a, pint   b) { return a > b ? b : a; }
+inline pint   max(pint   a, pint   b) { return a > b ? a : b; }
+inline puint  min(puint  a, puint  b) { return a > b ? b : a; }
+inline puint  max(puint  a, puint  b) { return a > b ? a : b; }
 inline int32  min(int32  a, int32  b) { return a > b ? b : a; }
 inline int32  max(int32  a, int32  b) { return a > b ? a : b; }
 inline int32 umin(uint32 a, uint32 b) { return a > b ? b : a; }

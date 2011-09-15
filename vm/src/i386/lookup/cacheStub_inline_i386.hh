@@ -16,7 +16,7 @@
 inline void CacheStub::jump(char* addr) {
   // Was branch_to, but this caused problems because
   // CacheStub::moveTo_inner does not relocate these. -- dmu 12/03
-  a->jmp((int32)addr, CodeAddressOperand);
+  a->jmp((pint)addr, CodeAddressOperand);
 }
 
 

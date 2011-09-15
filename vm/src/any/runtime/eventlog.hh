@@ -17,10 +17,9 @@ const fint NPARAM = 3;          // number of params per event
 // helper macros
 
 # define LOG_EVENT(name)           eventLog->log(name)
-# define LOG_EVENT1(name,p1)       eventLog->log(name, (void*)(p1))
-# define LOG_EVENT2(name,p1,p2)    eventLog->log(name, (void*)(p1),(void*)(p2))
-# define LOG_EVENT3(name,p1,p2,p3) \
-  eventLog->log(name, (void*)(p1), (void*)(p2), (void*)(p3))
+# define LOG_EVENT1(name,p1)       eventLog->log(name, (void*)(pint)(p1))
+# define LOG_EVENT2(name,p1,p2)    eventLog->log(name, (void*)(pint)(p1),(void*)(pint)(p2))
+# define LOG_EVENT3(name,p1,p2,p3) eventLog->log(name, (void*)(pint)(p1),(void*)(pint)(p2),(void*)(pint)(p3))
 
 enum EventStatus { starting, ending, atomic };
 

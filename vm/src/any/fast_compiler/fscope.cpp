@@ -292,7 +292,7 @@ void fcompiler_code_generator::define_branch_target() {
     warning2("NIC found non-empty expression stack at branch target "
             "at bytecode %d in method %s; "
             "The debug information will be incorrect.--dmu 9/96",
-            pc, stringOop(fscope->selector())->copy_null_terminated());
+            pint(pc), pint(stringOop(fscope->selector())->copy_null_terminated()));
   }
   // send expr stack out to registers
   fscope->materializeExprStack();

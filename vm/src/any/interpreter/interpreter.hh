@@ -46,7 +46,7 @@ class interpreter: public abstract_interpreter {
 
   oop* locals;
   int32 _length_locals;
-  int32 minOffset;
+  pint minOffset;
   bool hasParentLocalSlot;
   oop* cloned_blocks; // NULL or cloned block
   oop* stack;

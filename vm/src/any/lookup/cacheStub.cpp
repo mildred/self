@@ -583,7 +583,7 @@ CacheStub* CacheStub::copy_remove_all(sendDesc* send_desc, nmethod *delnm) {
 
   if (PrintPIC)
     lprintf("*removing nmethod %#lx from PIC %#lx (%d cases)",
-            delnm, this, (void*)ndel);
+            delnm, this, (int)ndel);
 
   gen_copy(arty - ndel, -1, delnm);
   deallocate2(true);
@@ -664,7 +664,7 @@ void CacheStub::replace_with_inline_cache(fint i)
   sendDesc* s= sd();
   fint arty= arity();
   if (PrintPIC)
-    lprintf("*deallocating %d-element PIC %#lx\n", (void*)arty, this); 
+    lprintf("*deallocating %d-element PIC %#lx\n", (int)arty, this); 
   fint j;
   CountStub **delVec= NEW_RESOURCE_ARRAY(CountStub*, arty);
   for (j= 0; j < arty; j++)
@@ -1065,7 +1065,7 @@ void* Stubs::allocate(int32 size) {
   int32 nfree = stubZone->freeBytes();
   if (p == NULL ||
       nfree < MinFree || nfree * 100 / stubZone->capacity() < MinFreePerc) {
-    LOG_EVENT1("stubs low on space: %ld bytes left", nfree);
+    LOG_EVENT1("stubs low on space: %ld bytes left", (void*)(pint)nfree);
     currentProcess->setupPreemption();
     needsWork = true;
   }
@@ -1116,7 +1116,7 @@ void Stubs::cleanup() {
   }
   // grow the zone
   int32 newSize = stubZone->capacity() * 2;
-  LOG_EVENT1("growing PIC zone to %ld bytes", newSize);
+  LOG_EVENT1("growing PIC zone to %ld bytes", (void*)(pint)newSize);
   if (WizardMode) {
     warning1("PIC code area overflowed - growing it to %ld bytes.", newSize);
     printIndent(); lprintf("Current zone: "); stubZone->print();
@@ -1203,8 +1203,8 @@ void Stubs::space_print() {
     f1 = 100.0 * cnt/ntotal; \
     f2 = 100.0 * size / total; \
     lprintf("%s: %d (%4.1f) %d bytes (%4.1f)\n", name, \
-            (void*)cnt, *(void**)&f1, \
-            (void*)size, *(void**)&f2); \
+            (void*)(pint)(cnt), *(void**)&f1, \
+            (void*)(pint)(size), *(void**)&f2); \
   }
   PRINT("PICs", npic, pic);
   PRINT("counters", ncount, count);

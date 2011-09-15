@@ -379,12 +379,12 @@ void interpreter::start_NLR(oop res) {
   if (CatchInterprocessReturns)
     catch_interprocess_returns(receiver);
   block_scope_and_desc_of_home( block_home_scope_frame, block_home_desc);
-  NLRSupport::save_NLR_results( res,  int32(block_home_scope_frame),  block_home_desc);
+  NLRSupport::save_NLR_results( res,  pint(block_home_scope_frame),  block_home_desc);
 }
 
 
 void interpreter::continue_NLR() {
-  if ((int32)block_scope_or_NLR_target() == NLRSupport::NLR_home_from_C()) {
+  if (block_scope_or_NLR_target() == NLRSupport::NLR_home_from_C()) {
     // this is the home frame (mixed) of the block
     NLRSupport::reset_have_NLR_through_C();  // home, that's it
   }
@@ -423,7 +423,9 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
     // -- dmu 2/96
 
     SaveNonVolRegsAndCall5( HandleReturnTrap,
-                            NLRSupport::have_NLR_through_C() ? NLRSupport::NLR_result_from_C() : stack[sp-1],
+                            NLRSupport::have_NLR_through_C() ?
+                              NLRSupport::NLR_result_from_C() :
+                              stack[sp-1],
                             (char*)currentFrame(),
                             NLRSupport::have_NLR_through_C(),
                             (frame*)NLRSupport::NLR_home_from_C(),

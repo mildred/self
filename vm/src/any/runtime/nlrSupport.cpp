@@ -21,7 +21,7 @@ extern "C" {
 // Don't access these this way from C++;
 
   oop   NLRResultFromC;    // params for ContinueNLRFromC
-  int32 NLRHomeFromC;
+  ptr_t NLRHomeFromC;
   int32 NLRHomeIDFromC;
   
   void continue_discard_stack();
@@ -57,11 +57,11 @@ bool NLRSupport::_have_NLR_through_C = false;
 // accessors for NLR vars above:
 
 oop    NLRSupport::NLR_result_from_C()  { return NLRResultFromC; }
-int32  NLRSupport::NLR_home_from_C()    { return NLRHomeFromC; }
+ptr_t  NLRSupport::NLR_home_from_C()    { return NLRHomeFromC; }
 int32  NLRSupport::NLR_home_ID_from_C() { return NLRHomeIDFromC; }
 
 void   NLRSupport::set_NLR_result_from_C(oop x)    { NLRResultFromC = x; }
-void   NLRSupport::set_NLR_home_from_C(int32 x)    { NLRHomeFromC = x; }
+void   NLRSupport::set_NLR_home_from_C(ptr_t x)    { NLRHomeFromC = x; }
 void   NLRSupport::set_NLR_home_ID_from_C(int32 x) { NLRHomeIDFromC = x; }
 
 

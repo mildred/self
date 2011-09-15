@@ -21,11 +21,11 @@ class NLRSupport /* AllStatic */ {
 
   // accessors for NLR vars above:
   static oop    NLR_result_from_C();
-  static int32  NLR_home_from_C();
+  static ptr_t  NLR_home_from_C();
   static int32  NLR_home_ID_from_C();
   
   static void   set_NLR_result_from_C(oop x);
-  static void   set_NLR_home_from_C(int32 x);
+  static void   set_NLR_home_from_C(ptr_t x);
   static void   set_NLR_home_ID_from_C(int32 x);
   
   

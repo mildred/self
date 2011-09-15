@@ -41,7 +41,7 @@ BaseAssembler::BaseAssembler(int32 instsSize, int32 locsSize,
 }
 
 
-void BaseAssembler::printX(int32 d, OperandType t, bool imm) {
+void BaseAssembler::printX(pint d, OperandType t, bool imm) {
   if (imm) {
     if (d < 0)  asm_lprintf("%d",  d); 
     else        asm_lprintf("%#x", d);

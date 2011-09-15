@@ -33,7 +33,7 @@ class DIDesc {
   pc_t jump_addr();
   void set_jump_addr(pc_t insts);
   
-  void shift_jump_addr(int32 delta) {
+  void shift_jump_addr(pint delta) {
     set_jump_addr((pc_t) ((pint) jump_addr() + delta)); }
   
   void unlink_me();
