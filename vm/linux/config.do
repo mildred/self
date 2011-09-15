@@ -11,7 +11,7 @@ rc_append CPPFLAGS "-I$(pwd)/generated/incls"
 rc_append LDFLAGS "-ldl -lX11 -lXext -lpthread"
 rc_append ASMFLAGS  "-x assembler-with-cpp"
 
-if [ -n $HAVE_X86_64 ]; then
+if [ -n "$COMPILE_FOR_32_BITS" ]; then
   rc_append ASMFLAGS -m32
   rc_append CFLAGS -m32
   rc_append CXXFLAGS -m32

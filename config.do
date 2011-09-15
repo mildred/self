@@ -20,9 +20,9 @@ case $BUILDPLATFORM in
   *)
     die "Unknown platform $BUILDPLATFORM" ;;
 esac
-if [ -n $HAVE_X86 ]; then
+if [ -n "$HAVE_X86" ]; then
   export TARGET_ARCH=i386
-elif [ -n $HAVE_PPC ]; then
+elif [ -n "$HAVE_PPC" ]; then
   export TARGET_ARCH=ppc
 else
   die "Unknown architecture $BUILDARCH"
@@ -39,8 +39,10 @@ error_flags='-Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloa
 feature_flags='-fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector -fkeep-inline-functions'
 
 
-if [ -n $HAVE_X86_64 ]; then
-  feature_flags="$feature_flags -fpermissive"
+if [ -n "$HAVE_X86_64" ]; then
+  #feature_flags="$feature_flags -fpermissive"
+  define_flags="$define_flags -DX86_64"
+  #rc_record COMPILE_FOR_32_BITS=1
 fi
 
 rc_append CPPFLAGS "$define_flags"
