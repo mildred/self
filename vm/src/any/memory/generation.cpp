@@ -493,7 +493,7 @@ void oldGeneration::cleanup_after_scavenge()
 // possible; or more than asked for, due to rounding).
 int oldGeneration::expand(int32 size)
 {
-  EventMarker em("expanding heap by %d", (void*)size);
+  EventMarker em("expanding heap by %d", (void*)(pint)size);
   assert(size >= 0, "negative expansion?");
   
   if (OS::is_directed_allocation_supported()
@@ -700,7 +700,7 @@ smi set_memory_low_space_threshold_prim(oop rcvrIgnored, smi newLST, void *FH)
   Unused(rcvrIgnored);
   if (newLST < Memory->old_gen->get_VM_reserved_mem()) {
     failure(FH, "Threshold set below VM reserve");
-    return NULL;
+    return smi(NULL);
   }
   smi oldLST= Memory->old_gen->getLowSpaceThreshold();
   Memory->old_gen->setLowSpaceThreshold(newLST);

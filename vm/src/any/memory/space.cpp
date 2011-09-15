@@ -549,7 +549,7 @@ void space::enumerate_families(enumeration* e) {
 
  oop* maps     = e->get_maps();
  smi  num_maps = e->get_num_maps();
- smi  hit_num;
+ int32 hit_num;
 
  // An experiment showed it is faster to search for maps
  // in an area instead of examine the map of each object
@@ -568,6 +568,8 @@ void space::enumerate_families(enumeration* e) {
     if (objp == (oop*)errorObjp) continue;
     mapOop m = as_oopsOop(objp)->map()->enclosing_mapOop();
     maps[num_maps] = m; // Place sentinel
+    #warning vectorfind_next_match returns int32* and we convert it to oop*
+    #warning which might be 64bits
     oop* matching_cell =
       (oop*) vectorfind_next_match((int32*) maps, (int32*) &m, 1, &hit_num);
     assert(matching_cell <= &maps[num_maps], "match out of area");

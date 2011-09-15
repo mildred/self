@@ -65,7 +65,7 @@ void rSet::record_multistores(oop* start, oop* end) {
     
   
   // p = first card boundary on or after start
-  register oop* p = (oop*)roundTo(int32(start), card_size);
+  register oop* p = (oop*)roundTo(pint(start), card_size);
   
   // but dont go past end!
   if (end < p) {
@@ -279,7 +279,7 @@ char* next_zero_byte(char *cp, char* end) {
   char old_end = *end;
   *end = 0;
 
-  int32* wp = (int32*)roundTo(int32(cp), sizeof(int32));
+  int32* wp = (int32*)roundTo(pint(cp), sizeof(int32));
 
   char* cwp = (char*) wp;
   switch (cwp - cp) {
