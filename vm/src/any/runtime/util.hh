@@ -68,7 +68,7 @@ inline void copy_words_up(int32* from, int32* to, fint count) {
 inline void copy_words_overlapping(int32* from, int32* to, fint count) {
   copy_oops_overlapping((oop*) from, (oop*) to, count);
 }
-inline void set_words(int32* from, fint count, int32 value = 0) {
+inline void set_words(int32* from, fint count, pint value = 0) {
   set_oops((oop*) from, count, (oop) value);
 }
 

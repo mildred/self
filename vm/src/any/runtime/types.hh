@@ -19,6 +19,10 @@
 // Base types from which all derived integer types should be obtained.
 //
 
+# include <stdint.h>
+typedef intptr_t  pint;
+typedef uintptr_t puint;
+
 typedef char             int8;          // signed integer with >= 7 bits
 typedef unsigned char   uint8;          // unsigned integer with >= 8 bits
 typedef short           int16;          // signed integer with >= 15 bits
